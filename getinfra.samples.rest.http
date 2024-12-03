@@ -1,0 +1,6 @@
+@getinfra.samples.rest_HostAddress = http://localhost:5085
+
+GET {{getinfra.samples.rest_HostAddress}}/ping
+Accept: application/json
+
+###
