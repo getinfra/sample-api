@@ -1,6 +1,6 @@
-﻿# GetInfra.Samples.Rest
+﻿# Sample API application
 
-Welcome to **MyProject**, a .NET-based API application that demonstrates handling HTTP requests and displaying information such as request headers and client IP addresses. This project is built with ASP.NET Core for simplicity and performance.
+Welcome to **getinfra.samples.rest**, a .NET-based API application that demonstrates handling HTTP requests and displaying information such as request headers and client IP addresses. This project is built with ASP.NET Core for simplicity and performance.
 
 ---
 
@@ -33,8 +33,8 @@ Welcome to **MyProject**, a .NET-based API application that demonstrates handlin
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/username/MyProject.git
-   cd MyProject
+   git clone https://github.com/getinfra/sample-api.git
+   cd sample-api
    ```
 
 2. Build the project:
@@ -53,7 +53,7 @@ Welcome to **MyProject**, a .NET-based API application that demonstrates handlin
    dotnet run
    ```
 
-2. The server will start on `http://localhost:5000`.
+2. The server will start on `http://localhost:5085`.
 
 ---
 
@@ -67,14 +67,28 @@ Welcome to **MyProject**, a .NET-based API application that demonstrates handlin
 #### Sample Response
 
 ```json
-{
-  "headers": {
-    "Host": "localhost:5000",
-    "User-Agent": "PostmanRuntime/7.28.4",
-    "Accept": "*/*"
+[
+  {
+    "name": "Accept",
+    "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
   },
-  "clientIp": "127.0.0.1"
-}
+  {
+    "name": "Host",
+    "value": "localhost:5085"
+  },
+  {
+    "name": "Accept-Encoding",
+    "value": "gzip, deflate, br, zstd"
+  },
+  {
+    "name": "Accept-Language",
+    "value": "en-GB,en-DE;q=0.9,en;q=0.8,de-DE;q=0.7,de;q=0.6,en-US;q=0.5,ru;q=0.4"
+  },
+  {
+    "name": "Cache-Control",
+    "value": "max-age=0"
+  }
+]
 ```
 
 ---
@@ -84,12 +98,12 @@ Welcome to **MyProject**, a .NET-based API application that demonstrates handlin
 ### cURL
 
 ```bash
-curl -X GET http://localhost:5000/ping
+curl -X GET http://localhost:5085/ping
 ```
 
 ### Browser
 
-Navigate to `http://localhost:5000/ping` in your web browser or API testing tool like Postman.
+Navigate to `http://localhost:5085/ping` in your web browser or API testing tool like Postman.
 
 ---
 
@@ -99,28 +113,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## How It Works
-
-The `/ping` endpoint is implemented in ASP.NET Core to capture the HTTP headers and client IP from the incoming request. Below is the relevant code snippet:
-
-```csharp
-[ApiController]
-[Route("[controller]")]
-public class PingController : ControllerBase
-{
-    [HttpGet]
-    public IActionResult Get()
-    {
-        var headers = Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString());
-        var clientIp = HttpContext.Connection.RemoteIpAddress?.ToString();
-
-        return Ok(new
-        {
-            headers,
-            clientIp
-        });
-    }
-}
-```
 
 Feel free to modify the code for your specific use case!
